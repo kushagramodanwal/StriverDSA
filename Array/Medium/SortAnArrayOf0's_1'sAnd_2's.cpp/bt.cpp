@@ -8,7 +8,6 @@ int main()
 
     int cnt0 = 0, cnt1 = 0, cnt2 = 0;
 
-    // counting
     for (int i = 0; i < n; i++)
     {
         if (arr[i] == 0)
@@ -19,16 +18,14 @@ int main()
             cnt2++;
     }
 
-    int idx = 0;
-
     for (int i = 0; i < cnt0; i++)
-        arr[idx++] = 0;
+        arr[i] = 0;
 
-    for (int i = 0; i < cnt1; i++)
-        arr[idx++] = 1;
+    for (int i = cnt0; i < cnt1 + cnt0; i++)
+        arr[i] = 1;
 
-    for (int i = 0; i < cnt2; i++)
-        arr[idx++] = 2;
+    for (int i = cnt1 + cnt0; i < n; i++)
+        arr[i] = 2;
 
     for (int i = 0; i < n; i++)
         cout << arr[i] << " ";
