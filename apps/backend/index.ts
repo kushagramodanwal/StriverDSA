@@ -1,48 +1,59 @@
-
-import express from "express"
+import express from "express";
 import cors from "cors";
 
-const app = express()
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-interface Issue {id: number, title: string, section: string}
-const ISSUES: Issue[] = [{
+interface Issue {
+  id: number;
+  title: string;
+  section: string;
+}
+const ISSUES: Issue[] = [
+  {
     id: 1,
     title: "Fix background color",
-    section: "todo"
-}, {
+    section: "todo",
+  },
+  {
     id: 2,
     title: "Fix background color",
-    section: "done"
-}];
+    section: "done",
+  },
+];
 
 app.post("/issue", (req, res) => {
-    const {title, section} = req.body;
-    ISSUES.push({
-        title, section, id: Math.random()
-    })
+  const { title, section } = req.body;
+  ISSUES.push({
+    title,
+    section,
+    id: Math.random(),
+  });
 
-    res.json({
-        message: "Issue create"
-    })
-})
+  res.json({
+    message: "Issue create",
+  });
+});
 
 app.get("/issues", (req, res) => {
-    res.json({issues: ISSUES});
-})
+  res.json({ issues: ISSUES });
+});
 
 app.post("/move", (req, res) => {
-    const {issueId, newSection} = req.body;
+  const { issueId, newSection } = req.body;
 
-    const issue = ISSUES.find(i => i.id == issueId);
+  const issue = ISSUES.find((i) => i.id == issueId);
 
-    if (issue) {
-        issue.section = newSection;
-        res.json({message: "done"});
-    } else {
-        res.status(411).json({message: "issue not found"});
-    }
-})
+  if (issue) {
+    issue.section = newSection;
+    res.json({ message: "done" });
+  } else {
+    res.status(411).json({ message: "issue not found" });
+  }
+});
 
-app.listen(3001);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`HTTP Server listening on port ${PORT}`);
+});
