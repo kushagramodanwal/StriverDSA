@@ -23,7 +23,7 @@ export function BoardHeader({
     <header className="board-header">
       <div className="board-header-left">
         <div className="board-brand">
-          <span className="board-title">Sprint Board</span>
+          <span className="board-title">Kanverge</span>
           <span className="board-total-badge">{totalCards} cards</span>
         </div>
       </div>
